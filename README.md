@@ -7,6 +7,14 @@ skills your are missing for your current profile based on your uploaded resume.
 
 This project is the result of a dissertation as a student at the KU Leuven
 
+# Screenshots
+
+# Screenshot of Web app result
+![Application user](/screenshots/Webapp-Application user.JPG?raw=true "Main web app interface")
+![Data Analyst](/screenshots/Webapp-Data Analyst.JPG?raw=true "Top Profile skills")
+![Data Engineer](/screenshots/Webapp-Data Engineer.JPG?raw=true "NER Model monitor")
+
+
 # Content
 This project contains the following aspects:
 
