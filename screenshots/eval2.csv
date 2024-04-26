@@ -1,0 +1,17 @@
+Model												| precision	|	recall|	F1
+IT1 - CPU Pretrained - Adam                           | 0.8442    | 0.7551 | 0.7971 
+IT1 - CPU Raw - Accuracy                              | 0.8321    | 0.7534 | 0.7908 
+IT1 - CPU Raw - Efficiency                            | 0.8271    | 0.7677 | 0.7963 
+IT1 - CPU Pretrained - Smaller Batcher and RAdam      | 0.8438    | 0.7753 | 0.8081 
+ALL - CPU Pretrained - Adam - F1                      | 0.7895    | 0.6926 | 0.7379 
+ALL - CPU Pretrained - Adam - P                       | 0.839     | 0.6464 | 0.7302 
+ALL - CPU Pretrained - Adam - R                       | 0.7402    | 0.7157 | 0.7277 
+ALL - CPU Raw - Accuracy - F1                         | 0.73      | 0.7429 | 0.7364 
+ALL - CPU Raw - Accuracy - P                          | 0.8554    | 0.6134 | 0.7145 
+ALL - CPU Raw - Accuracy - R                          | 0.6629    | 0.7628 | 0.7093 
+ALL - CPU Raw - Efficiency - F1                       | 0.8162    | 0.6813 | 0.7427 
+ALL - CPU Raw - Efficiency - P                        | 0.8482    | 0.6071 | 0.7077 
+ALL - CPU Raw - Efficiency - R                        | 0.7191    | 0.7533 | 0.7358 
+ALL - CPU Pretrained - Smaller Batcher and RAdam - F1 | 0.8291    | 0.6985 | 0.7582 
+ALL - CPU Pretrained - Smaller Batcher and RAdam - P  | 0.8374    | 0.6736 | 0.7466 
+ALL - CPU Pretrained - Smaller Batcher and RAdam - R  | 0.8161    | 0.699  | 0.753

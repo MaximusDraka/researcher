@@ -1,0 +1,33 @@
+{
+  "lang":"en",
+  "name":"ruler_skill",
+  "version":"0.0.1",
+  "spacy_version":">=3.5.3,<3.6.0",
+  "description":"",
+  "author":"Tom Larminier",
+  "email":"",
+  "url":"",
+  "license":"GLP-3.0",
+  "spacy_git_version":"512241e12",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "entity_ruler":[
+      "SKILL"
+    ]
+  },
+  "pipeline":[
+    "entity_ruler"
+  ],
+  "components":[
+    "entity_ruler"
+  ],
+  "disabled":[
+
+  ]
+}

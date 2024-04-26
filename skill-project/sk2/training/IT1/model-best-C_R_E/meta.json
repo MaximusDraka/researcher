@@ -1,0 +1,52 @@
+{
+  "lang":"en",
+  "name":"C_R_E",
+  "version":"0.0.1",
+  "spacy_version":">=3.5.3,<3.6.0",
+  "description":"",
+  "author":"Tom Larminier",
+  "email":"",
+  "url":"",
+  "license":"GLP-3.0",
+  "spacy_git_version":"512241e12",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "tok2vec":[
+
+    ],
+    "ner":[
+      "SKILL"
+    ]
+  },
+  "pipeline":[
+    "tok2vec",
+    "ner"
+  ],
+  "components":[
+    "tok2vec",
+    "ner"
+  ],
+  "disabled":[
+
+  ],
+  "performance":{
+    "ents_f":0.7963206307,
+    "ents_p":0.8271155596,
+    "ents_r":0.7677364865,
+    "ents_per_type":{
+      "SKILL":{
+        "p":0.8271155596,
+        "r":0.7677364865,
+        "f":0.7963206307
+      }
+    },
+    "tok2vec_loss":597.6863571728,
+    "ner_loss":1985.1988164589
+  }
+}

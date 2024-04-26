@@ -1,0 +1,176 @@
+title: "Detecting SKILL (Named Entity Recognition)"
+description: "This project uses Spacy matcher and NER Annotator to bootstrap an NER model to detect skills names in Indeed, Livecareer and vaia.be websites"
+# Variables can be referenced across the project.yml using ${vars.var_name}
+
+vars:
+  project_path: "C:/Users/tom/projects/skill-skeleton/skill-project/sk2"
+  #C_R_E_F, C_R_E_P, C_R_E_R
+  #C_R_A_F, C_R_A_P, C_R_A_R
+  #C_PT_E_F, C_PT_E_P, C_PT_E_R
+  #C_PT_E_HP_F, C_PT_E_HP_P, C_PT_E_HP_R
+  type: "C_PT_E_HP_P"
+  config: "config.cfg"
+  name: "ner_skill"
+  version: "0.0.1"
+  train: "All-train-data"
+  dev: "All-test-data"
+  valid: "All-valid-data"
+  gpu: ""
+
+# These are the directories that the project needs. The project CLI will make
+# sure that they always exist.
+directories: ["assets", "training", "configs", "scripts", "corpus", "packages"]
+
+# Assets that should be downloaded or available in the directory. We're shipping
+# them with the project, so they won't have to be downloaded. But the
+# 'project assets' command still lets you verify that the checksums match.
+assets:
+  - dest: "assets/${vars.train}.json"
+    checksum: "4461081e67d8160cab4624e61448f371"
+    description: "JSON-formatted training data joined after NER Annotator"
+  - dest: "assets/${vars.dev}.jsonl"
+    checksum: "4d730f6132de46fad3f76720ce9794f7"
+    description: "JSON-formatted test data joined after NER Annotator"
+
+
+# Workflows are sequences of commands (see below) executed in order. You can
+# run them via "spacy project run [workflow]". If a commands's inputs/outputs
+# haven't changed, it won't be re-run.
+workflows:
+  all:
+    - preprocess   
+    - train
+    - evaluate
+
+# Project commands, specified in a style similar to CI config files (e.g. Azure
+# pipelines). The name is the command name that lets you trigger the command
+# via "spacy project run [command] [path]". The help message is optional and
+# shown when executing "spacy project run [optional command] [path] --help".
+commands:
+  - name: "info"
+    help: "Info about current Spacy installation"
+    script:
+      - "python -m spacy info --markdown" 
+
+  - name: "create-config"
+    help: "use spacy base config to create a new config file"
+    script:     
+      - "python -m spacy init fill-config configs/base-config.cfg configs/config.cfg"
+
+  - name: "download"
+    help: "Download a spaCy model with pretrained vectors: https://spacy.io/models/"
+    script:     
+      - "python -m spacy download en_core_web_lg"
+      - "python -m spacy download en_core_web_trf"
+
+  - name: "preprocess"
+    help: "Convert the data to spaCy's binary format"
+    script:
+      - "python scripts/preprocess.py ${vars.project_path}/assets/${vars.train}.json ${vars.project_path}/corpus/${vars.train}.spacy"
+      - "python scripts/preprocess.py ${vars.project_path}/assets/${vars.dev}.json ${vars.project_path}/corpus/${vars.dev}.spacy"
+      - "python scripts/preprocess.py ${vars.project_path}/assets/${vars.valid}.json ${vars.project_path}/corpus/${vars.valid}.spacy"
+    deps:
+      - "assets/${vars.train}.json"
+      - "assets/${vars.dev}.json"
+      - "assets/${vars.valid}.json"
+      - "scripts/preprocess.py"
+    outputs:
+      - "corpus/${vars.train}.spacy"
+      - "corpus/${vars.dev}.spacy"
+      - "corpus/${vars.valid}.spacy"  
+  
+  - name: "debug-data"
+    help: "debug data"
+    script:
+      - "python -m spacy debug data configs/${vars.type}-${vars.config} --paths.train corpus/${vars.train}.spacy --paths.dev corpus/${vars.dev}.spacy"
+
+  - name: "train"
+    help: "Train a named entity recognition model"
+    script:
+      - "python -m spacy train configs/${vars.type}-${vars.config} --output training/ --paths.train corpus/${vars.train}.spacy --paths.dev corpus/${vars.dev}.spacy ${vars.gpu}"
+    deps:
+      - "corpus/${vars.train}.spacy"
+      - "corpus/${vars.dev}.spacy"
+    outputs:
+      - "training/model-best-${vars.type}"
+
+  # Evaluate the model and export metrics with the same evaluate file, otherwise the result can not be compared
+  - name: "evaluate"
+    help: "Evaluate the model and export metrics"
+    script:
+      #- "python -m spacy evaluate training/IT1/model-ruler corpus/${vars.valid}.spacy --output training/IT1/model-ruler/metrics.json"
+      #- "python -m spacy evaluate training/IT1/model-best-C_R_E corpus/${vars.valid}.spacy --output training/IT1/model-best-C_R_E/metrics.json"
+      #- "python -m spacy evaluate training/IT1/model-best-C_R_A corpus/${vars.valid}.spacy --output training/IT1/model-best-C_R_A/metrics.json"
+      #- "python -m spacy evaluate training/IT1/model-best-C_PT_E corpus/${vars.valid}.spacy --output training/IT1/model-best-C_PT_E/metrics.json"
+      #- "python -m spacy evaluate training/IT1/model-best-C_PT_E_HP_F corpus/${vars.valid}.spacy --output training/IT1/model-best-C_PT_E_HP_F/metrics.json"      
+      #- "python -m spacy evaluate training/IT2/model-ruler corpus/${vars.valid}.spacy --output training/IT2/model-ruler/metrics.json"
+      #- "python -m spacy evaluate training/IT2/model-best-C_R_E corpus/${vars.valid}.spacy --output training/IT2/model-best-C_R_E/metrics.json"
+      #- "python -m spacy evaluate training/IT2/model-best-C_R_A corpus/${vars.valid}.spacy --output training/IT2/model-best-C_R_A/metrics.json"
+      #- "python -m spacy evaluate training/IT2/model-best-C_PT_E corpus/${vars.valid}.spacy --output training/IT2/model-best-C_PT_E/metrics.json"
+      #- "python -m spacy evaluate training/IT2/model-best-C_PT_E_HP_F corpus/${vars.valid}.spacy --output training/IT2/model-best-C_PT_E_HP_F/metrics.json"
+      #- "python -m spacy evaluate training/All/model-best-C_R_E corpus/${vars.valid}.spacy --output training/All/model-best-C_R_E/metrics.json"
+      #- "python -m spacy evaluate training/All/model-best-C_R_A_F corpus/${vars.valid}.spacy --output training/All/model-best-C_R_A_F/metrics.json"
+      #- "python -m spacy evaluate training/All/model-best-C_PT_E_F corpus/${vars.valid}.spacy --output training/All/model-best-C_PT_E_F/metrics.json"
+      #- "python -m spacy evaluate training/All/model-best-C_PT_E_HP_F corpus/${vars.valid}.spacy --output training/All/model-best-C_PT_E_HP_F/metrics.json --displacy-path training/All/model-best-C_PT_E_HP_F/displacy/"
+      #- "python -m spacy evaluate training/All/model-best-C_PT_E_HP_P corpus/${vars.valid}.spacy --output training/All/model-best-C_PT_E_HP_P/metrics.json --displacy-path training/All/model-best-C_PT_E_HP_P/displacy/"
+      #- "python -m spacy evaluate training/All/model-best-C_PT_E_HP_R corpus/${vars.valid}.spacy --output training/All/model-best-C_PT_E_HP_R/metrics.json --displacy-path training/All/model-best-C_PT_E_HP_R/displacy/"
+      #- "python -m spacy evaluate training/All/model-best-C_PT_E_P corpus/${vars.valid}.spacy --output training/All/model-best-C_PT_E_P/metrics.json --displacy-path training/All/model-best-C_PT_E_P/displacy/"
+      #- "python -m spacy evaluate training/All/model-best-C_PT_E_R corpus/${vars.valid}.spacy --output training/All/model-best-C_PT_E_R/metrics.json --displacy-path training/All/model-best-C_PT_E_R/displacy/"
+      - "python -m spacy evaluate training/All/model-best-C_R_A_P corpus/${vars.valid}.spacy --output training/All/model-best-C_R_A_P/metrics.json"
+      - "python -m spacy evaluate training/All/model-best-C_R_A_R corpus/${vars.valid}.spacy --output training/All/model-best-C_R_A_R/metrics.json"
+      - "python -m spacy evaluate training/All/model-best-C_R_E_P corpus/${vars.valid}.spacy --output training/All/model-best-C_R_E_P/metrics.json"
+      - "python -m spacy evaluate training/All/model-best-C_R_E_R corpus/${vars.valid}.spacy --output training/All/model-best-C_R_E_R/metrics.json"
+
+
+    deps:
+      - "corpus/${vars.valid}.spacy"    
+    outputs:
+      - "metrics.json"      
+
+  - name: package
+    help: "Package the trained model so it can be installed"
+    script:
+      - "python -m spacy package training/All/model-best-${vars.type} packages --name ${vars.type}_${vars.name} --version ${vars.version} --force"
+    deps:
+      - "training/All/model-best-${vars.type}"
+    outputs_no_cache:
+      - "packages/en_${vars.type}_${vars.name}-${vars.version}/dist/en_${vars.type}_${vars.name}-${vars.version}.tar.gz"
+
+  - name: visualize-model
+    help: Visualize the model's output interactively using Streamlit
+    script:
+      - "streamlit run scripts/visualize_model.py training/All/model-best-${vars.type},training/IT2/model-ruler 'I can programm in Python'"
+    deps:
+      - "scripts/visualize_model.py"
+      - "training/All/model-best-${vars.type}"
+      - "training/IT2/model-ruler"
+
+  - name: "visualize-data"
+    help: "Explore the annotated data in an interactive Streamlit app"
+    script:
+      - "streamlit run scripts/visualize_data.py assets/${vars.train}.json,assets/${vars.dev}.json"
+    deps:
+      - "scripts/visualize_data.py"
+      - "assets/${vars.train}.json"
+      - "assets/${vars.dev}.json"
+  
+  - name: "print-model-stats"
+    help: "Overview of model evaluation metrix"
+    script:
+      - "python scripts/print_model_stats.py"
+    deps:
+      - "scripts/print_model_stats.py"
+ 
+  - name: "print-eval-stats"
+    help: "Overview of model evaluation metrix"
+    script:
+      - "python scripts/print_eval_stats.py"
+    deps:
+      - "scripts/print_eval_stats.py"
+   
+  - name: "compare-model-eval"
+    help: "Overview of model evaluation metrix"
+    script:
+      - "python scripts/compare_model_eval.py"
+    deps:
+      - "scripts/compare_model_eval.py"

@@ -1,0 +1,7 @@
+# To ensure app dependencies are ported from your virtual environment/host machine into your container, run 'pip freeze > requirements.txt' in the terminal to overwrite this file
+streamlit==1.33.0
+requests==2.31.0
+pypdf==4.2.0
+streamlit_tags==1.2.8
+pandas==2.2.1
+altair==5.3.0

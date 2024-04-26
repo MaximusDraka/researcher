@@ -1,0 +1,176 @@
+{
+  "uuid": "221644db-3091-4c61-9952-c54df9209ae3",
+  "title": "SkillSkeleton Dashboard",
+  "version": "2.4",
+  "settings": {
+    "pagenumber": 1,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {},
+    "theme": "light"
+  },
+  "pages": [
+    {
+      "title": "Data Insights",
+      "reports": [
+        {
+          "id": "5cc91d32-3516-48b6-92e0-18914ea875fe",
+          "title": "Total skills by profile",
+          "query": "MATCH (p:Profile)-[:HAS]->(skills) \nRETURN p.name as Profile,count(skills) as Total_Skills \n\n\n",
+          "width": 7,
+          "height": 4,
+          "x": 0,
+          "y": 0,
+          "type": "pie",
+          "selection": {
+            "index": "Profile",
+            "value": "Total_Skills",
+            "key": "(none)"
+          },
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "588e6cd3-d679-43fd-a204-6a88a7d8d342",
+          "title": "Data Engineer skills with a score > 30",
+          "query": "MATCH (p:Profile {name: \"Data Engineer\"})-[r:HAS]->(skill) \nWHERE r.score > 30 \nRETURN p,r,skill",
+          "width": 7,
+          "height": 4,
+          "x": 0,
+          "y": 4,
+          "type": "graph",
+          "selection": {
+            "Profile": "name",
+            "HAS": "(label)",
+            "Skill": "name"
+          },
+          "settings": {},
+          "schema": [
+            [
+              "Profile",
+              "name"
+            ],
+            [
+              "HAS",
+              "score"
+            ],
+            [
+              "Skill",
+              "name",
+              "category"
+            ]
+          ]
+        },
+        {
+          "id": "b7ebe733-a5b0-4f0f-aef4-2cc4d1ea0cb4",
+          "title": "Number of Jobs",
+          "query": "MATCH (j:Job)\nRETURN count(j)\n",
+          "width": 4,
+          "height": 2,
+          "x": 19,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "6c20ad26-6e3a-4bd3-bb9d-a8a832f58108",
+          "title": "Number of CV",
+          "query": "MATCH (cv:CV)\nRETURN count(cv)",
+          "width": 4,
+          "height": 2,
+          "x": 19,
+          "y": 2,
+          "type": "value",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "224b1622-c38f-4250-a66f-aed541af0b27",
+          "title": "Top Courses with > 10 skills",
+          "query": "MATCH (c:Course)-[o:OFFERS]->(s:Skill) \nWITH c, count(*) as skills \nWHERE skills > 10 \nRETURN c.title as course,skills  \nORDER BY skills desc \nLIMIT 10\n\n\n",
+          "width": 12,
+          "height": 4,
+          "x": 7,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "layout": "horizontal"
+          },
+          "schema": []
+        }
+      ]
+    },
+    {
+      "title": "Extra Information",
+      "reports": [
+        {
+          "id": "f4c1ee1f-15aa-46ff-af86-fb3da8c120a6",
+          "title": "Top skill references in Jobs and CV",
+          "query": "MATCH (s:Skill)-[c:CONTAINS]-()  \nWITH s, count(*) as skills \nWHERE skills > 10 \nRETURN s.name as Skill,skills as Mentioned\nORDER BY skills desc \nLIMIT 10",
+          "width": 6,
+          "height": 4,
+          "x": 0,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "623ae8de-3af2-446c-87e0-6e3fa5085647",
+          "title": "Python score by profile",
+          "query": "\nMATCH (p:Profile )-[h:HAS]-(s:Skill) WHERE s.name='python' RETURN p.name as Profile, h.score as score ORDER BY score desc\n\n",
+          "width": 7,
+          "height": 4,
+          "x": 6,
+          "y": 0,
+          "type": "bar",
+          "selection": {
+            "index": "Profile",
+            "value": "score",
+            "key": "(none)"
+          },
+          "settings": {
+            "labelRotation": 0
+          },
+          "schema": []
+        },
+        {
+          "id": "729ffc07-855a-46f4-8499-11567e5f6eea",
+          "title": "Next 10 free courses",
+          "query": "MATCH (c:Course) \nWHERE c.price = 'free' AND c.date <> 'NA' \nWITH c,apoc.date.parse(c.date, \"ms\", \"dd/MM/yyyy\") AS ms\nRETURN c.title as Course,date(datetime({epochmillis: ms})) AS date\nORDER BY date asc\nLIMIT 10\n\n\n",
+          "width": 23,
+          "height": 4,
+          "x": 0,
+          "y": 4,
+          "type": "table",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "194e0799-4d40-4ad1-8c41-5b0613dbe81b",
+          "title": "Low score skills for review",
+          "query": "MATCH (p:Profile)-[h:HAS]->(s:Skill) \nWHERE h.score < 10 \nRETURN h.score,s.name \nORDER By h.score asc\nLIMIT 200",
+          "width": 6,
+          "height": 4,
+          "x": 13,
+          "y": 0,
+          "type": "json",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {
+    "active": true,
+    "activeReducers": []
+  }
+}

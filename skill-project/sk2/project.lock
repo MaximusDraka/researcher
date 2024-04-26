@@ -1,0 +1,117 @@
+preprocess:
+  cmd: python -m spacy run preprocess
+  script:
+    - python scripts/preprocess.py C:/Users/tom/projects/skill-skeleton/skill-project/sk2/assets/IT1-valid-data.json
+      C:/Users/tom/projects/skill-skeleton/skill-project/sk2/corpus/IT1-valid-data.spacy
+  deps:
+    - path: assets/IT1-train-data.json
+      md5: 203e5fae82e2c45843741af992251390
+    - path: assets/IT1-test-data.json
+      md5: b4c8bed5de47121ed1a93e41d2049dd9
+    - path: assets/IT1-valid-data.json
+      md5: 2057c9d56516a0bba29261212edb14c9
+    - path: scripts/preprocess.py
+      md5: 023de3d95b56dc8ff8f377f977b8909c
+  outs:
+    - path: corpus/IT1-train-data.spacy
+      md5: cccc7f81a66ac35b7873ea0f11a233bd
+    - path: corpus/IT1-test-data.spacy
+      md5: 24435b2827b6d36d2f2190fbf37b213d
+    - path: corpus/IT1-valid-data.spacy
+      md5: 32211b7914a8fc71f698c31d28a6726a
+  spacy_version: 3.5.3
+  spacy_git_version: '512241e12'
+train:
+  cmd: python -m weasel run train
+  script:
+    - 'python -m spacy train configs/C_R_E_R-config.cfg --output training/ --paths.train
+      corpus/All-train-data.spacy --paths.dev corpus/All-test-data.spacy '
+  deps:
+    - path: corpus/All-train-data.spacy
+      md5: d6ea08eec63d175b5d5c069a8df7bcf7
+    - path: corpus/All-test-data.spacy
+      md5: 51789fffa74048380357a7c32cfcd873
+  outs:
+    - path: training/model-best-C_R_E_R
+      md5: null
+evaluate:
+  cmd: python -m weasel run evaluate
+  script:
+    - python -m spacy evaluate training/All/model-best-C_R_A_P corpus/All-valid-data.spacy
+      --output training/All/model-best-C_R_A_P/metrics.json
+    - python -m spacy evaluate training/All/model-best-C_R_A_R corpus/All-valid-data.spacy
+      --output training/All/model-best-C_R_A_R/metrics.json
+    - python -m spacy evaluate training/All/model-best-C_R_E_P corpus/All-valid-data.spacy
+      --output training/All/model-best-C_R_E_P/metrics.json
+    - python -m spacy evaluate training/All/model-best-C_R_E_R corpus/All-valid-data.spacy
+      --output training/All/model-best-C_R_E_R/metrics.json
+  deps:
+    - path: corpus/All-valid-data.spacy
+      md5: 4c89959442872c4dc19f7d7cc0ba339e
+  outs:
+    - path: metrics.json
+      md5: null
+package:
+  cmd: python -m weasel run package
+  script:
+    - python -m spacy package training/All/model-best-C_PT_E_HP_P packages --name
+      C_PT_E_HP_P_ner_skill --version 0.0.1 --force
+  deps:
+    - path: training/All/model-best-C_PT_E_HP_P
+      md5: 4240c9ac0480fcc30017eff85d92e201
+  outs:
+    - path: packages/en_C_PT_E_HP_P_ner_skill-0.0.1/dist/en_C_PT_E_HP_P_ner_skill-0.0.1.tar.gz
+      md5: 75e5523da37f38a01f7ee0170b383972
+info:
+  cmd: python -m spacy run info
+  script:
+    - python -m spacy info --markdown
+  deps: []
+  outs: []
+  spacy_version: 3.5.3
+  spacy_git_version: '512241e12'
+print-stats:
+  cmd: python -m weasel run print-stats
+  script:
+    - python scripts/print_stats.py
+  deps:
+    - path: scripts/print_stats.py
+      md5: ba64a08d18ccff952cb485e6fd47d8a1
+  outs: []
+create-config:
+  cmd: python -m weasel run create-config
+  script:
+    - python -m spacy init fill-config configs/base-config.cfg configs/config.cfg
+  deps: []
+  outs: []
+print-eval-stats:
+  cmd: python -m weasel run print-eval-stats
+  script:
+    - python scripts/print_eval_stats.py
+  deps:
+    - path: scripts/print_eval_stats.py
+      md5: 3776b3aa7c6ac21f9e20d5da683466ea
+  outs: []
+print-model-stats:
+  cmd: python -m weasel run print-model-stats
+  script:
+    - python scripts/print_model_stats.py
+  deps:
+    - path: scripts/print_model_stats.py
+      md5: c0721627b12388706ddf907f5cbf0ce7
+  outs: []
+compare-model-eval:
+  cmd: python -m weasel run compare-model-eval
+  script:
+    - python scripts/compare_model_eval.py
+  deps:
+    - path: scripts/compare_model_eval.py
+      md5: d023d4b3cdfa00c681cab849d4a0a5b6
+  outs: []
+debug-data:
+  cmd: python -m weasel run debug-data
+  script:
+    - python -m spacy debug data configs/C_PT_E_HP-config.cfg --paths.train corpus/All-train-data.spacy
+      --paths.dev corpus/All-test-data.spacy
+  deps: []
+  outs: []

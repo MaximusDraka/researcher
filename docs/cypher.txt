@@ -1,0 +1,39 @@
+GET ALL nodes without edges
+----------------------------
+
+Match(n)
+where not exists ( (n)--() )
+return n
+
+https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/#_lists
+
+
+MATCH (n) WHERE n.category = 'Tools' RETURN n
+MATCH (p:Profile {name: "Data Engineer"}) RETURN p
+MATCH (p:Profile {name: "Data Engineer"})-[:HAS]->(skills) RETURN p,skills
+MATCH (p:Profile {name: "Data Engineer"})-[r:HAS]->(skill) WHERE r.score > 30 RETURN p,skill
+MATCH (p:Profile {name: "Data Engineer"})-[r:HAS]->(skill) WHERE r.score > 10 AND skill.category = 'Tools' RETURN p,skill
+
+MATCH (p:Profile {name: 'Data Engineer'})-[r:HAS]->(s:Skill) RETURN  count(*)
+
+
+
+CALL gds.graph.drop('my-store-graph') YIELD graphName;
+
+CALL gds.graph.project(
+  'myGraph',
+  ['Profile','Skill'],
+  {
+    HAS: {
+      orientation: 'REVERSE',
+      properties: ['score']
+    }
+  }
+)
+
+
+CALL gds.degree.stream('myGraph',{ relationshipWeightProperty: 'score' })
+    YIELD nodeId, score
+    RETURN gds.util.asNode(nodeId).name AS name, score AS weightedFollowers    
+    ORDER BY weightedFollowers DESC, name DESC
+

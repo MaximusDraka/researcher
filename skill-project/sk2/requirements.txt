@@ -1,0 +1,5 @@
+streamlit
+rich
+spacy_util
+json
+typer

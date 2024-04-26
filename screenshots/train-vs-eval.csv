@@ -1,0 +1,3 @@
+Type  |Precision |Recall |F1     
+Model | 0.8374    | 0.6736 | 0.7466 
+Eval  | 0.812     | 0.7729 | 0.792
