@@ -1,12 +1,19 @@
-docker build -t streamlitfrontend .
-docker build -t fastapibackend .
-
-docker run -p 8501:8501 --name frontend streamlitfrontend
-docker run -p 8000:8000 --name backend fastapibackend
-
-docker-compose create
-docker-compose up
+Create docker containers
+------------------------
+/app/front/docker build -t streamlitfrontend .
+/app/back/docker build -t fastapibackend .
 
 
-http://127.0.0.1:8000/obtainlogasJSON
+Compose docker containers
+-------------------------
+/app/docker-compose up
+
+
+Access the application
+----------------------
+http://127.0.0.1:8501
+
+
+Access the FAST API documentation
+---------------------------------
 http://127.0.0.1:8000/#docs

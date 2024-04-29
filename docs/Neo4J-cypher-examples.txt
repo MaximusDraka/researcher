@@ -1,0 +1,72 @@
+Some examples
+-------------
+https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/#_lists
+
+
+GET ALL nodes without edges
+----------------------------
+Match(n)
+where not exists ( (n)--() )
+return n
+
+
+Basic cypher queries
+--------------------
+MATCH (n) WHERE n.category = 'Tools' RETURN n
+MATCH (p:Profile {name: "Data Engineer"}) RETURN p
+MATCH (p:Profile {name: "Data Engineer"})-[:HAS]->(skills) RETURN p,skills
+MATCH (p:Profile {name: "Data Engineer"})-[r:HAS]->(skill) WHERE r.score > 30 RETURN p,skill
+MATCH (p:Profile {name: "Data Engineer"})-[r:HAS]->(skill) WHERE r.score > 10 AND skill.category = 'Tools' RETURN p,skill
+
+
+Number of skills for a "Data Engineer" profile
+----------------------------------------------
+MATCH (p:Profile {name: 'Data Engineer'})-[r:HAS]->(s:Skill) RETURN  count(*)
+
+
+Remove graph
+------------
+CALL gds.graph.drop('my-store-graph') YIELD graphName;
+
+
+Create graph
+------------
+CALL gds.graph.project(
+  'myGraph',
+  ['Profile','Skill'],
+  {
+    HAS: {
+      orientation: 'REVERSE',
+      properties: ['score']
+    }
+  }
+)
+
+
+Calculate the degree for the given graph
+----------------------------------------
+CALL gds.degree.stream('myGraph',{ relationshipWeightProperty: 'score' })
+    YIELD nodeId, score
+    RETURN gds.util.asNode(nodeId).name AS name, score AS weightedFollowers    
+    ORDER BY weightedFollowers DESC, name DESC
+
+
+
+Create apoc.conf file
+---------------------
+https://neo4j.com/docs/apoc/current/config/
+
+
+Export complete Neo4J database
+------------------------------
+CALL apoc.export.cypher.all("all.cypher", {
+format: "cypher-shell",
+useOptimizations: {type: "UNWIND_BATCH", unwindBatchSize: 20}
+})
+YIELD file, batches, source, format, nodes, relationships, properties, time, rows, batchSize
+RETURN file, batches, source, format, nodes, relationships, properties, time, rows, batchSize;
+
+Import database
+---------------
+https://medium.com/neo4j/efficient-neo4j-data-import-using-cypher-scripts-7d1268b0747
+/data/database/Skill-skeleton-DB.cypher

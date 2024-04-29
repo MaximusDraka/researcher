@@ -14,9 +14,17 @@ This project is the result of a dissertation as a student at the KU Leuven
 ![Data Analyst](/screenshots/Webapp-Data-Analyst.JPG?raw=true "Top Profile skills")
 ![Data Engineer](/screenshots/Webapp-Data-Engineer.JPG?raw=true "NER Model monitor")
 
+# Setup
+- Download full project
+- create pip or conda environment based on requirements.txt
+- Create Neo4J database from /data/database/Skill-skeleton-DB.cypher
+- Configure neo4J database to use local fixed IP - See /screenshots for example
+- create .env file in the root folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI
+- Use docker /docs to build the web-app
+- Run python main.py --help
 
 # Content
-This project contains the following aspects:
+This project based on Python contains the following aspects:
 
 - Ontology
 - Knowledge base - Creation of Neo4J database
@@ -53,7 +61,7 @@ This project contains the following aspects:
     - Docker container - Front-end - Streamlit
         - Upload PDF resume - detect skills - define profile - recommend courses
             - Displacy
-            - charts
+            - Altair charts
             - Basic streamlit components
         - Model log - Dashboard
         - Profile top skills - Dashboard
@@ -63,19 +71,19 @@ This project contains the following aspects:
         - Top skill by profile endpoint
 
 # Tools used to perform this project
-- Visual studio Code + Co-pilot plugin
-- Anaconda Desktop
-- Power BI Desktop
-- Python 3.11.8
-- NER annotator website
+- Visual studio Code + Co-pilot plugin - 1.88.1
+- Anaconda Desktop - 2.6.0
+- Power BI Desktop - 2.123.742.0 64-bit
+- Python - 3.11.8
+- NER annotator website - https://tecoholic.github.io/ner-annotator/
 - Neo4J
-    - Desktop
-    - NeoDash		
-    - Browser		
-    - Bloom	
-- Docker Desktop	
+    - Desktop - 5.12.0
+    - NeoDash - 2.4.6		
+    - Browser - 5.15.0		
+    - Bloom	- 2.11.0
+- Docker Desktop - v24.0.7	
 - GIT	
-- yEd	
+- yEd - 3.23.2	
 
 # Major Python modules used
 - Pandas
@@ -116,3 +124,4 @@ Although all the code is available to re-create the project.
 
 # Recommended improvements
 - Turn all notebooks into python scripts and add them to the spacy project
+- Host Neo4J : https://neo4j.com/cloud/platform/aura-graph-database/
