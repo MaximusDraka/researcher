@@ -1,27 +1,33 @@
 # Overview
-Dissertation project about skill mapping from CV to jobs and courses
+Dissertation project about skill mapping from CV to jobs and courses.
 
 # Project aim
 The aim is to create a application that suggests courses to follow to improve the 
 skills your are missing for your current profile based on your uploaded resume.
 
-This project is the result of a dissertation as a student at the KU Leuven
+Currently the following profiles are part of this project: Data engineer, Data analyst and Data scientist.
 
-# Screenshots
+This project is the result of a dissertation as a student at the KU Leuven.
 
 # Screenshot of Web app result
 ![Application user](/screenshots/Webapp-Application-user.JPG?raw=true "Main web app interface")
 ![Data Analyst](/screenshots/Webapp-Data-Analyst.JPG?raw=true "Top Profile skills")
 ![Data Engineer](/screenshots/Webapp-Data-Engineer.JPG?raw=true "NER Model monitor")
 
-# Setup
+# Setup - Python app
 - Download full project
 - create pip or conda environment based on requirements.txt
-- Create Neo4J database from /data/database/Skill-skeleton-DB.cypher
-- Configure neo4J database to use local fixed IP - See /screenshots for example
+- Create Neo4J database from /data/database/profile-kb.dump 
+    - Option A : Local Neo4J desktop - Configure neo4J database to use local fixed IP - See /screenshots for example
+    - Option B : Neo4J Aura
 - create .env file in the root folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI
 - Use docker /docs to build the web-app
 - Run python main.py --help
+
+# Setup - Web app
+- Download /app
+- Install docker
+- Follow instructions under /docs/docker-commands.txt
 
 # Content
 This project based on Python contains the following aspects:
@@ -76,11 +82,14 @@ This project based on Python contains the following aspects:
 - Power BI Desktop - 2.123.742.0 64-bit
 - Python - 3.11.8
 - NER annotator website - https://tecoholic.github.io/ner-annotator/
-- Neo4J
+- Local Neo4J
     - Desktop - 5.12.0
     - NeoDash - 2.4.6		
     - Browser - 5.15.0		
     - Bloom	- 2.11.0
+- Cloud Neo4J
+    - Neo4J Aura
+    - https://neodash.graphapp.io/
 - Docker Desktop - v24.0.7	
 - GIT	
 - yEd - 3.23.2	
@@ -102,8 +111,8 @@ This project based on Python contains the following aspects:
 # Disclaimers
 All the information you contribute to this repository, including github issues and code samples are public and open.
 The data pre-processing is performed with multiple jupyter Notebooks, afterwards a spacy project takes over the NER model training.
-This project is not 100% portable, as the Neo4J database is required to run locally outside a docker container.
-Although all the code is available to re-create the project.
+This project requires a Neo4J database containing the ontology and available courses, a sample databse can be found as a dump file under /data/database.
+All the code is available to re-create the project.
 
 # Jupyter notebooks references
 - Create KB in Neo4J based on vocabulary - Only SKILLS and profiles, no links 

@@ -116,3 +116,24 @@
 2024-04-24 00:17:32,940 | INFO | main python app finished running
 2024-04-24 00:19:15,444 | INFO | main python app finished running
 2024-04-24 00:36:45,745 | INFO | main python app finished running
+2024-04-30 16:16:39,505 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:40:31,639 | INFO | AssertionError('Driver not initialized!')
+2024-04-30 16:42:13,959 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:49:25,061 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:53:55,238 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:55:45,601 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:57:57,402 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-05-01 20:49:36,946 | INFO | main python app finished running
+2024-05-01 20:50:54,603 | INFO | main python app finished running
+2024-05-01 20:53:19,429 | INFO | main python app finished running
+2024-05-01 20:54:00,656 | INFO | main python app finished running
+2024-05-01 21:00:08,825 | INFO | main python app finished running
+2024-05-01 21:04:50,967 | INFO | NameError("name 'Column' is not defined")
+2024-05-01 21:05:39,857 | INFO | NameError("name 'X' is not defined")
+2024-05-01 21:06:09,481 | INFO | main python app finished running
+2024-05-01 21:08:30,981 | INFO | app.ipynb finished running
+2024-05-01 21:17:41,257 | INFO | app.ipynb finished running
+2024-05-01 21:20:21,310 | INFO | app.ipynb finished running
+2024-05-01 21:22:47,861 | INFO | UnboundLocalError("cannot access local variable 'profiles' where it is not associated with a value")
+2024-05-01 21:26:41,875 | INFO | app.ipynb finished running
+2024-05-01 21:27:23,359 | INFO | app.ipynb finished running

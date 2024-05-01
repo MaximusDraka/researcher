@@ -115,3 +115,12 @@ debug-data:
       --paths.dev corpus/All-test-data.spacy
   deps: []
   outs: []
+download:
+  cmd: python -m weasel run download
+  script:
+    - python -m spacy download en_core_web_sm
+    - python -m spacy download en_core_web_md
+    - python -m spacy download en_core_web_lg
+    - python -m spacy download en_core_web_trf
+  deps: []
+  outs: []

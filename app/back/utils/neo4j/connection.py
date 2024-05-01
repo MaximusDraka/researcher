@@ -20,7 +20,7 @@ class Neo4jConnection:
             self.__driver.close()
         
         
-    def query(self, query: str, parameters: dict=None, db: str="profile-kb", response_type: str="list") -> list:
+    def query(self, query: str, parameters: dict=None, db: str="neo4j", response_type: str="list") -> list:
         assert self.__driver is not None, "Driver not initialized!"
         session = None
         response = None

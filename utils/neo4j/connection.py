@@ -1,4 +1,6 @@
 from neo4j import GraphDatabase
+import sys
+from neo4j.debug import watch
 
 
 class Neo4jConnection:
@@ -9,7 +11,9 @@ class Neo4jConnection:
         self.__pwd = pwd
         self.__driver = None
         try:
-            self.__driver = GraphDatabase.driver(self.__uri, auth=(self.__user, self.__pwd))                  
+            #watch("neo4j", out=sys.stdout)
+            self.__driver = GraphDatabase.driver(self.__uri, auth=(self.__user, self.__pwd))
+            self.__driver.verify_connectivity()                 
             
         except Exception as e:
             print("Failed to create the driver:", e)
@@ -20,7 +24,7 @@ class Neo4jConnection:
             self.__driver.close()
         
         
-    def query(self, query: str, parameters: dict=None, db: str="profile-kb", response_type: str="list") -> list:
+    def query(self, query: str, parameters: dict=None, db: str="neo4j", response_type: str="list") -> list:
         assert self.__driver is not None, "Driver not initialized!"
         session = None
         response = None

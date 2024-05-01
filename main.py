@@ -17,10 +17,10 @@ import warnings
 warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
 warnings.filterwarnings('ignore') 
 
-sys.path.insert(1, 'C:/Users/tom/projects/skill-skeleton/')
-sys.path.insert(2, 'C:/Users/tom/projects/skill-skeleton/utils/')
-sys.path.insert(3, 'C:/Users/tom/projects/skill-skeleton/utils/neo4j/')
-sys.path.insert(4, 'C:/Users/tom/projects/skill-skeleton/models/')
+sys.path.insert(1, 'C:/Users/larmi/projects/skill-skeleton/')
+sys.path.insert(2, 'C:/Users/larmi/projects/skill-skeleton/utils/')
+sys.path.insert(3, 'C:/Users/larmi/projects/skill-skeleton/utils/neo4j/')
+sys.path.insert(4, 'C:/Users/larmi/projects/skill-skeleton/models/')
 
 from connection import Neo4jConnection
 import recommender_model
@@ -33,8 +33,8 @@ import setup
 import query
 import graph
 
-from altair import *
-
+import altair as alt
+alt.renderers.enable("browser")
 
 
 typer.main.get_command_name = lambda name: name
@@ -158,25 +158,26 @@ def print_profiles(profiles:pd.DataFrame, classification_type:str) -> None:
         
         for index, row in profiles.iterrows():
             table.add_row(row['profile'], cast_item(row['count']), cast_item(row['max']), cast_item(row['coverage']), cast_item(row['total_score']))
+        
+        df = pd.melt(profiles, id_vars=['profile'], value_vars=['count', 'max', 'coverage', 'total_score'], var_name='Genre', value_name='Score')
+    
+        chart = alt.Chart(df).mark_bar().encode(
+            column=alt.Column('Genre'),
+            x=alt.X('profile'),
+            y=alt.Y('Score'),
+            color=alt.Color('profile', scale=alt.Scale(range=['#EA98D2', '#659CCA', '#F6C85F']))
+                ).configure_view(
+                    strokeWidth=0.0,
+                )
+
+        chart.show()
+
     else:
         table.add_column("skills", style="white")  
         for index, row in profiles.iterrows():
             table.add_row(row['profile'],row['skills'])
     console = Console()
-    console.print(table)
-    
-    df = pd.melt(profiles, id_vars=['Profiles'], value_vars=['Count', 'Max', 'Coverage', 'Total score'], var_name='Genre', value_name='Score')
-
-    chart = Chart(df).mark_bar().encode(
-        column=Column('Genre'),
-        x=X('Profiles'),
-        y=Y('Score'),
-        color=Color('Genre', scale=Scale(range=['#EA98D2', '#659CCA', '#F6C85F', '#7CC272']))
-        ).configure_view(
-            strokeWidth=0.0,
-        )
-
-    chart.show()
+    console.print(table)    
 
 
 def print_app_config(PDF_resume: str,NER_type: str,scenario: str,to_be_profile: str,show_displacy: bool,recommender_type: str,classification_type: str) -> None:
@@ -373,7 +374,7 @@ def main(pdf_resume:Annotated[str, typer.Option(help="File name located in data\
 
 if __name__ == "__main__":
 
-    #PDF_resume = '26167298.pdf'
+    #PDF_resume = 'Consultant-1.pdf'
     #NER Type: A = Ruler / B = Matcher / C = Trained NER / D = Open AI
     #NER_type = 'C'
 
@@ -391,7 +392,8 @@ if __name__ == "__main__":
     #classification_type = "A2"
     
     #python main.py --help
-    #python main.py --pdf_resume 26167298.pdf --ner_type C --scenario B --to_be_profile "Data Scientist" --show_displacy --recommender_type cypher-skills --classification_type A2
-    #python main.py --pdf_resume 20176584.pdf --ner_type A --scenario A --to_be_profile "Data Scientist" --show_displacy --recommender_type cypher-skills --classification_type A2
+    #python main.py --pdf_resume Consultant-1.pdf --ner_type C --scenario B --to_be_profile "Data Scientist" --show_displacy --recommender_type cypher-skills --classification_type A2
+    
+    #python main.py --pdf_resume Consultant-1.pdf --ner_type A --scenario A --to_be_profile "Data Scientist" --show_displacy --recommender_type cypher-skills --classification_type A2
     
     typer.run(main)
