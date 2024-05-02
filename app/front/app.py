@@ -120,12 +120,11 @@ def run():
                 config =  response['config']
                 meta =  response['meta']
                 
-                if status == 'SUCCESS':
-                    
-                
-                    with col2:
-                        
-                        st.title("Results")
+                with col2:
+
+                    st.title("Results")
+
+                    if status == 'SUCCESS':  
                         
                         if ner_type != 'Matcher':
                             st.subheader('Model Information') 
@@ -152,26 +151,26 @@ def run():
                             if response['skills_to_learn']:                         
                                 missing_skills = st_tags(label='### Skills that you want to learn',
                                             text='',
-                                            value=response['skills_to_learn'].split(), key='2')    
-                    
-                        st.subheader('Profile results')          
-                        #st.dataframe(df_profiles)
-                        
-                        data = pd.melt(df_profiles, id_vars=['profile'], value_vars=['count', 'max', 'coverage', 'total_score'], var_name='Genre', value_name='Score')
-                        
-                        c = (
-                            Chart(data).mark_bar().encode(
-                            column=Column('Genre'),
-                            x=X('profile'),
-                            y=Y('Score'),
-                            color=Color('Genre', scale=Scale(range=['#EA98D2', '#659CCA', '#F6C85F', '#7CC272']))
-                            ).configure_view(
-                                strokeWidth=0.0,
-                            ) 
-                        )
-                        st.altair_chart(c, use_container_width=False)  
+                                            value=response['skills_to_learn'].split(), key='2')                       
+                                
                         
                         if scenario == 'Improve existing profile with missing skills' or scenario == 'Improve existing profile with current skills':
+                            data = pd.melt(df_profiles, id_vars=['profile'], value_vars=['count', 'max', 'coverage', 'total_score'], var_name='Genre', value_name='Score')
+
+                            st.subheader('Profile results') 
+
+                            c = (
+                                Chart(data).mark_bar().encode(
+                                column=Column('Genre'),
+                                x=X('profile'),
+                                y=Y('Score'),
+                                color=Color('Genre', scale=Scale(range=['#EA98D2', '#659CCA', '#F6C85F', '#7CC272']))
+                                ).configure_view(
+                                    strokeWidth=0.0,
+                                ) 
+                            )
+                            st.altair_chart(c, use_container_width=False) 
+
                             st.subheader('Detected profile') 
                             st.info('Profile is chosen based on coverage DESC, total DESC')
                         else:
@@ -180,12 +179,16 @@ def run():
                                                             
                                         
                         st.subheader('Recommended courses') 
-                        st.markdown(df_courses.to_html(render_links=True),unsafe_allow_html=True)  
+                        st.markdown(df_courses.to_html(render_links=True),unsafe_allow_html=True)                          
+                    
+                    if status == 'NO_SKILLS_FOUND':
+                        st.error('No skills detected')
                         
-                       
-                         
-                else:
-                    st.error('Skills not detected')                     
+                        st.subheader('Recommended general courses') 
+                        st.markdown(df_courses.to_html(render_links=True),unsafe_allow_html=True) 
+                            
+                    if status == 'NO_PROFILE_FOUND':
+                        st.error('No profile detected')            
                     
     
     if choice == 'Data Engineer':

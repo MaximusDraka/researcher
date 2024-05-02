@@ -34,7 +34,7 @@ def missing_skills(conn: Neo4jConnection, profiles: any, my_skills: list) -> tup
     return chosen_profile, to_learn
 
 
-def extract_skills(data: str, conn: Neo4jConnection, nlp: any, loaded_matcher: any, NER_type: str) -> tuple[any, pd.DataFrame]:
+def extract_skills(data: str, conn: Neo4jConnection, nlp: any, loaded_matcher: any, NER_type: str) -> tuple[any, list[str]]:
 
 
     #Evaluate A - Ruler version
@@ -197,7 +197,24 @@ async def recommendcourses_endpoint(user_input: ApplicationInput):
     doc, skills = extract_skills(user_input.data, conn, nlp, loaded_matcher, ner_type)
     
     if len(skills) == 0:
-           return ApplicationOutput(status="ERROR",skills=[],skills_to_learn="",profiles={},courses={},displacy_html="",config="",meta="")
+           
+            log_profiles= {"profile": {"0": None}}
+            recommended_courses = query.get_courses_with_many_skills(conn, 5)            
+
+            monitor.write_to_log(scenario,user_input.data,ner_type,skills,log_profiles,recommended_courses.to_dict(),classification_type,recommender_type,to_be_profile)
+            app_logger.logger.info('Webapp finished running - no skills found in the resume')
+    
+            return ApplicationOutput(status="NO_SKILLS_FOUND",
+                                    skills=[], 
+                                    skills_to_learn="",                              
+                                    profiles={}, 
+                                    courses=recommended_courses.to_dict(),
+                                    displacy_html="",
+                                    config=config,
+                                    meta=meta)    
+
+
+          
     else:
                
         if show_displacy: 
@@ -225,7 +242,7 @@ async def recommendcourses_endpoint(user_input: ApplicationInput):
 
         if profiles is None:          
             
-            return ApplicationOutput(status="ERROR",skills=[],skills_to_learn="",profiles={},courses={},displacy_html="",config="",meta="")
+            return ApplicationOutput(status="NO_PROFILE_FOUND",skills=[],skills_to_learn="",profiles={},courses={},displacy_html="",config="",meta="")
         else:    
             # Search for missing skills for the profile
             if scenario == 'B' or scenario == 'C':
@@ -233,7 +250,7 @@ async def recommendcourses_endpoint(user_input: ApplicationInput):
                 skill_to_learn = ' '.join([x for x in df_skills_to_learn['skill']])
             else:
                 chosen_profile = profiles.iloc[0]['profile']
-                skill_to_learn = ' '.join([x for x in skills])  
+                skill_to_learn = ' '.join([x for x in skills]) 
                        
             
             if recommender_type == 'tfidf-data':

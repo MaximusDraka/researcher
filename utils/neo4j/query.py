@@ -199,3 +199,18 @@ def get_recommended_courses(conn: Neo4jConnection, skills: list, num_recommendat
     LIMIT $num_recommendations
     '''
     return pd.DataFrame([dict(_) for _ in conn.query(query_string,parameters=parameters)])
+
+
+def get_courses_with_many_skills(conn: Neo4jConnection, num_recommendations: int=5) -> pd.DataFrame:
+    
+    parameters = {'num_recommendations': num_recommendations}
+
+    query_string = '''
+    MATCH (c:Course)-[o:OFFERS]->(s:Skill)
+    WITH c, count(*) as skills
+    WHERE skills > 10
+    RETURN c.title as title,c.url as url, skills as total
+    ORDER BY skills desc 
+    LIMIT $num_recommendations
+    '''
+    return pd.DataFrame([dict(_) for _ in conn.query(query_string,parameters=parameters)])

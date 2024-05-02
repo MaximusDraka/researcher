@@ -51,7 +51,7 @@ def read_resume(filename: str) -> str:
     return file_content
 
 
-def extract_skills(data: str, conn: Neo4jConnection, nlp: any, loaded_matcher: any, NER_type: str, show_displacy:bool) -> pd.DataFrame:
+def extract_skills(data: str, conn: Neo4jConnection, nlp: any, loaded_matcher: any, NER_type: str, show_displacy:bool) -> list[str]:
 
 
     #Evaluate A - Ruler version
@@ -298,7 +298,16 @@ def main(pdf_resume:Annotated[str, typer.Option(help="File name located in data\
         skills = extract_skills(data, conn, nlp, loaded_matcher, ner_type, show_displacy)
 
         if len(skills) == 0:
-            print('No skills found in the resume')
+            print('No skills found in the resume so general courses will be proposed.')
+
+            skills = []        
+            log_profiles= {"profile": {"0": None}}
+            recommended_courses = query.get_courses_with_many_skills(conn, 5)
+
+            print_courses(recommended_courses)
+
+            monitor.write_to_log(scenario,data,ner_type,skills,log_profiles,recommended_courses.to_dict(),classification_type,recommender_type,to_be_profile)
+            app_logger.logger.info('app.ipynb finished running - no skills found in the resume')
         else:
             print(f'Skills found in the PDF resume: ', skills)    
                    
@@ -313,13 +322,14 @@ def main(pdf_resume:Annotated[str, typer.Option(help="File name located in data\
                     profiles = recommender_model.profiles_B(conn, skills)          
                     
             else:
+                #Scenario C = specific profile
                 profiles = [to_be_profile]
 
             if profiles is None:
                 print('No profile found')
             else:
-            
-                print_profiles(profiles, classification_type) 
+                if scenario == 'A' or scenario == 'B':
+                    print_profiles(profiles, classification_type) 
                 
                 # Search for missing skills for the profile
                 if scenario == 'B' or scenario == 'C':
