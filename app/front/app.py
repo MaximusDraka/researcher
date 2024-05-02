@@ -195,7 +195,7 @@ def run():
         response = get_log_file()             
        
         df_log = pd.DataFrame(response)
-        df_log['date'] = pd.to_datetime(df_log['date'])
+        df_log['date'] = pd.to_datetime(df_log['date'],dayfirst=True)
     
         mask = (df_log['date'].dt.date == pd.Timestamp.today().date())
         df_today = df_log[mask]

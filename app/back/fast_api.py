@@ -19,7 +19,7 @@ from utils.neo4j.connection import Neo4jConnection
 from utils.neo4j import query
 from utils import logger_util, monitor_util, kb_util
 from models import recommender_model, classification_model
-import setup
+
 
 
 def missing_skills(conn: Neo4jConnection, profiles: any, my_skills: list) -> tuple[str, pd.DataFrame]:
@@ -63,21 +63,16 @@ def extract_skills(data: str, conn: Neo4jConnection, nlp: any, loaded_matcher: a
     return doc, no_duplicates_list
 
 
-def config_app(NER_type: str) -> tuple[any, logger_util.Logger_util, monitor_util.Monitor, Neo4jConnection, any, any, str, str]:
+def config_app(NER_type: str) -> tuple[logger_util.Logger_util, monitor_util.Monitor, Neo4jConnection, any, any, str, str]:
     # Load the stored environment variables ########################################################################
     load_dotenv()
 
-    app_config, app_logger, monitor, conn, nlp, loaded_matcher = None, None, None, None, None, None
+    app_logger, monitor, conn, nlp, loaded_matcher = None, None, None, None, None
 
     # Setup #########################################################################################################
 
-    config = setup.read_config()
-    app_config = config["APP"]
-    log_config = config["LOG"]
-    monitor_config = config["MONITOR"]
-
-    app_logger = logger_util.Logger_util(log_config["file"])
-    monitor = monitor_util.Monitor(monitor_config["file"])
+    app_logger = logger_util.Logger_util(os.getenv("LOG_FILE"))
+    monitor = monitor_util.Monitor(os.getenv("MONITOR_FILE"))
 
     conn = Neo4jConnection(uri=os.getenv("DB_URI"), 
                         user=os.getenv("DB_USERNAME"),              
@@ -115,7 +110,7 @@ def config_app(NER_type: str) -> tuple[any, logger_util.Logger_util, monitor_uti
         config = nlp.config.to_str()
         meta=nlp.meta
         
-    return app_config, app_logger, monitor, conn, nlp, loaded_matcher, config, meta
+    return app_logger, monitor, conn, nlp, loaded_matcher, config, meta
 
 
 class ApplicationInput(BaseModel):
@@ -197,7 +192,7 @@ async def recommendcourses_endpoint(user_input: ApplicationInput):
     show_displacy = user_input.show_displacy
     
     #Configure application
-    app_config, app_logger, monitor, conn, nlp, loaded_matcher, config, meta  = config_app(ner_type)
+    app_logger, monitor, conn, nlp, loaded_matcher, config, meta  = config_app(ner_type)
     
     doc, skills = extract_skills(user_input.data, conn, nlp, loaded_matcher, ner_type)
     

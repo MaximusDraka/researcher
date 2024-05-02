@@ -1,12 +1,13 @@
 import spacy
 from spacy import displacy
 from spacy.util import filter_spans
-
 import pickle
-import sys  
+
+import sys
+import os
 
 import pandas as pd
-import os
+
 from dotenv import load_dotenv
 import typer
 from typing_extensions import Annotated
@@ -17,10 +18,11 @@ import warnings
 warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
 warnings.filterwarnings('ignore') 
 
-sys.path.insert(1, 'C:/Users/larmi/projects/skill-skeleton/')
-sys.path.insert(2, 'C:/Users/larmi/projects/skill-skeleton/utils/')
-sys.path.insert(3, 'C:/Users/larmi/projects/skill-skeleton/utils/neo4j/')
-sys.path.insert(4, 'C:/Users/larmi/projects/skill-skeleton/models/')
+
+sys.path.insert(1, os.getenv("PROJECT_PATH") + '/')
+sys.path.insert(2, os.getenv("PROJECT_PATH") + '/utils/')
+sys.path.insert(3, os.getenv("PROJECT_PATH") + '/utils/neo4j/')
+sys.path.insert(4, os.getenv("PROJECT_PATH") + '/models/')
 
 from connection import Neo4jConnection
 import recommender_model
@@ -29,7 +31,6 @@ import pdf_util
 import kb_util
 import logger_util
 import monitor_util
-import setup
 import query
 import graph
 
@@ -40,9 +41,9 @@ alt.renderers.enable("browser")
 typer.main.get_command_name = lambda name: name
 
 ###################################################################################################################################
-def read_resume(app_config, filename: str) -> str:
+def read_resume(filename: str) -> str:
     
-    file_content = pdf_util.read_PDF('%s/data/cv/%s' % (app_config["root"],filename))   
+    file_content = pdf_util.read_PDF('%s/data/cv/%s' % (os.getenv("PROJECT_PATH"),filename))   
     
     #Remove punctuation from the data
     file_content = kb_util.fix(file_content)
@@ -227,21 +228,16 @@ def missing_skills(conn: Neo4jConnection, profiles: any, my_skills: list) -> tup
     return chosen_profile, to_learn
 
 
-def config_app(NER_type: str) -> tuple[any, logger_util.Logger_util, monitor_util.Monitor, Neo4jConnection, any, any]:
+def config_app(NER_type: str) -> tuple[logger_util.Logger_util, monitor_util.Monitor, Neo4jConnection, any, any]:
     # Load the stored environment variables ########################################################################
     load_dotenv()
 
-    app_config, app_logger, monitor, conn, nlp, loaded_matcher = None, None, None, None, None, None
+    app_logger, monitor, conn, nlp, loaded_matcher = None, None, None, None, None
 
     # Setup #########################################################################################################
 
-    config = setup.read_config()
-    app_config = config["APP"]
-    log_config = config["LOG"]
-    monitor_config = config["MONITOR"]
-
-    app_logger = logger_util.Logger_util(log_config["file"])
-    monitor = monitor_util.Monitor(monitor_config["file"])
+    app_logger = logger_util.Logger_util(os.getenv("LOG_FILE"))
+    monitor = monitor_util.Monitor(os.getenv("MONITOR_FILE"))
 
     conn = Neo4jConnection(uri=os.getenv("DB_URI"), 
                         user=os.getenv("DB_USERNAME"),              
@@ -250,19 +246,19 @@ def config_app(NER_type: str) -> tuple[any, logger_util.Logger_util, monitor_uti
     # Load the NER model    
     if NER_type == 'A':
         NER_model = 'ruler_model'
-        nlp = spacy.load("%s/models/NER/%s" % (app_config["root"],NER_model))
+        nlp = spacy.load("%s/models/NER/%s" % (os.getenv("PROJECT_PATH"),NER_model))
     
     if NER_type == 'B':
         nlp = spacy.load("en_core_web_sm")
         nlp.vocab.strings.add('SKILL')
-        filename = "%s/models/NER/finalized_matcher.pickle" % (app_config["root"])
+        filename = "%s/models/NER/finalized_matcher.pickle" % (os.getenv("PROJECT_PATH"))
         loaded_matcher = pickle.load(open(filename, 'rb'))    
     
     if NER_type == 'C':
         NER_model = 'model-best-C_PT_E_HP_P'
-        nlp = spacy.load("%s/models/NER/%s" % (app_config["root"],NER_model))
+        nlp = spacy.load("%s/models/NER/%s" % (os.getenv("PROJECT_PATH"),NER_model))
         
-    return app_config, app_logger, monitor, conn, nlp, loaded_matcher
+    return app_logger, monitor, conn, nlp, loaded_matcher
 
 
 def main(pdf_resume:Annotated[str, typer.Option(help="File name located in data\cv folder")], 
@@ -292,11 +288,11 @@ def main(pdf_resume:Annotated[str, typer.Option(help="File name located in data\
     try:
 
         #Configure application
-        app_config, app_logger, monitor, conn, nlp, loaded_matcher  = config_app(ner_type)
+        app_logger, monitor, conn, nlp, loaded_matcher  = config_app(ner_type)
         print_app_config(pdf_resume,ner_type,scenario,to_be_profile,show_displacy,recommender_type,classification_type)
 
         # Read resume and extract skills
-        data = read_resume(app_config, pdf_resume)
+        data = read_resume(pdf_resume)
 
         # Extract skills
         skills = extract_skills(data, conn, nlp, loaded_matcher, ner_type, show_displacy)

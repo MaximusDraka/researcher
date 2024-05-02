@@ -1,3 +1,8 @@
+Configure docker-compose.yml
+----------------------------
+1/ Docker runs in UTC by default - TZ environment variable does not work
+2/ Update volume to your local project folder /data/logs/
+
 Create docker containers
 ------------------------
 /app/front/docker build -t streamlitfrontend .

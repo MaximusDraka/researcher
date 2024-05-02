@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 from datetime import datetime
+import pytz
 
 class Monitor:    
     
@@ -9,8 +10,10 @@ class Monitor:
     
     
     def write_to_log(self,scenario: str,resume: str,ner_model_version: str,skills: str,profiles: str,courses: str,classification_model_version: str,recommender_model_version: str, to_be_profile: str) -> str:    
-        now = datetime.now()
         
+        timezone = pytz.timezone('Europe/Brussels')
+        now = datetime.now(tz = timezone)
+
         obj = {"date":now.strftime("%d/%m/%Y %H:%M:%S"),"scenario": scenario,"resume": resume, "ner_model_version": ner_model_version, "skills": skills, "profiles": profiles, "courses": courses, "classification_model_version": classification_model_version, "recommender_model_version": recommender_model_version, "to_be_profile": to_be_profile}
 
         with open(self.file, "a") as file:

@@ -20,12 +20,12 @@ This project is the result of a dissertation as a student at the KU Leuven.
 - Create Neo4J database from /data/database/profile-kb.dump 
     - Option A : Local Neo4J desktop - Configure neo4J database to use local fixed IP - See /screenshots for example
     - Option B : Neo4J Aura
-- create .env file in the root folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI
-- Use docker /docs to build the web-app
-- Run python main.py --help
+- create .env file in the root folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI- 
+- Run python main.py --help or notebooks/demo/app.ipynb
 
 # Setup - Web app
 - Download /app
+- create .env file in the /app/back folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI, PROJECT_PATH, LOG_FILE, MONITOR_FILE
 - Install docker
 - Follow instructions under /docs/docker-commands.txt
 

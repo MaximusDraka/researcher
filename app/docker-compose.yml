@@ -7,6 +7,8 @@ services:
     ports:
       - 8501:8501
     working_dir: /usr/src/app
+    environment:
+      - TZ:"Europe/Brussels"
     
     
   data-api:
@@ -15,3 +17,7 @@ services:
     ports:
       - 8000:8000
     working_dir: /usr/src/api
+    volumes:
+      - "C:/Users/larmi/projects/skill-skeleton/data/log/:/usr/src/api/data/log/"
+    environment:
+      - TZ:"Europe/Brussels"

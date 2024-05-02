@@ -137,3 +137,24 @@
 2024-05-01 21:22:47,861 | INFO | UnboundLocalError("cannot access local variable 'profiles' where it is not associated with a value")
 2024-05-01 21:26:41,875 | INFO | app.ipynb finished running
 2024-05-01 21:27:23,359 | INFO | app.ipynb finished running
+2024-05-01 22:56:57,753 | INFO | main python app finished running
+2024-05-01 23:05:19,722 | INFO | app.ipynb finished running
+2024-05-01 23:10:28,325 | INFO | app.ipynb finished running
+2024-05-01 23:12:48,698 | INFO | This is an info message!
+2024-05-01 23:12:48,700 | ERROR | This is an error message.
+2024-05-01 23:12:48,701 | WARNING | This is a warning message.
+2024-05-01 23:12:48,701 | CRITICAL | This is a critical message.
+2024-05-01 22:12:26,043 | INFO | Webapp finished running
+2024-05-01 22:25:54,859 | INFO | Webapp finished running
+05/02/2024 12:39:08 AM Romance Daylight Time | INFO | main python app finished running
+05/01/2024 10:44:38 PM UTC | INFO | Webapp finished running
+05/01/2024 10:53:50 PM UTC | INFO | Webapp finished running
+05/01/2024 11:00:35 PM UTC | INFO | Webapp finished running
+05/02/2024 12:51:06 PM Romance Daylight Time | INFO | main python app finished running
+05/02/2024 01:00:24 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 01:05:33 PM Romance Daylight Time | INFO | This is an info message!
+05/02/2024 01:05:33 PM Romance Daylight Time | ERROR | This is an error message.
+05/02/2024 01:05:33 PM Romance Daylight Time | WARNING | This is a warning message.
+05/02/2024 01:05:33 PM Romance Daylight Time | CRITICAL | This is a critical message.
+05/02/2024 12:08:19 PM UTC | INFO | Webapp finished running
+05/02/2024 02:10:32 PM Romance Daylight Time | INFO | main python app finished running

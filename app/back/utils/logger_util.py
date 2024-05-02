@@ -24,7 +24,7 @@ class Logger_util():
         if not logger.hasHandlers():        
         
             logger.setLevel(logging.INFO)
-            formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
+            formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s', datefmt="%m/%d/%Y %I:%M:%S %p %Z")
 
             stdout_handler = logging.StreamHandler(sys.stdout)
             stdout_handler.setLevel(logging.NOTSET)
