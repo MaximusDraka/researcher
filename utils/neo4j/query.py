@@ -61,7 +61,7 @@ def get_remaining_skills_by_profile(conn: Neo4jConnection, profile_name: str, sk
     return pd.DataFrame([dict(_) for _ in conn.query(query_string,parameters=parameters)])
 
 
-def get_all_for_graph(conn: Neo4jConnection,profile_name: str) -> pd.DataFrame:   
+def get_all_for_graph(conn: Neo4jConnection,profile_name: str, db: str="neo4j") -> pd.DataFrame:   
 
     parameters = {'profile_name': profile_name}
 
@@ -69,7 +69,7 @@ def get_all_for_graph(conn: Neo4jConnection,profile_name: str) -> pd.DataFrame:
     MATCH (p:Profile {name: $profile_name})-[r:HAS]->(s:Skill) 
     WHERE s.category = 'Tools' RETURN *
     '''
-    return conn.query(query_string,response_type="graph",parameters=parameters)
+    return conn.query(query_string,response_type="graph",parameters=parameters,db=db)
 
 
 def get_10_random_skills(conn: Neo4jConnection) -> list[str]:   
