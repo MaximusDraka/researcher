@@ -1,0 +1,176 @@
+2024-03-11 00:10:56,724 | INFO | app.ipynb finished running
+2024-03-19 21:43:25,181 | INFO | app.ipynb finished running
+2024-03-19 21:43:52,018 | INFO | app.ipynb finished running
+2024-03-19 21:45:59,235 | INFO | app.ipynb finished running
+2024-03-28 14:50:26,201 | INFO | app.ipynb finished running
+2024-03-28 15:02:10,948 | INFO | app.ipynb finished running
+2024-03-28 15:09:18,285 | INFO | app.ipynb finished running
+2024-03-28 15:11:36,469 | INFO | app.ipynb finished running
+2024-03-28 15:13:24,549 | INFO | app.ipynb finished running
+2024-03-28 15:17:12,947 | INFO | app.ipynb finished running
+2024-03-28 15:18:30,678 | INFO | app.ipynb finished running
+2024-03-28 15:20:33,452 | INFO | app.ipynb finished running
+2024-03-28 15:23:07,528 | INFO | app.ipynb finished running
+2024-03-28 15:29:11,362 | INFO | app.ipynb finished running
+2024-03-28 15:30:27,574 | INFO | app.ipynb finished running
+2024-03-28 15:31:27,820 | INFO | app.ipynb finished running
+2024-03-28 15:33:57,322 | INFO | app.ipynb finished running
+2024-03-28 15:36:23,017 | INFO | app.ipynb finished running
+2024-03-28 15:37:20,015 | INFO | app.ipynb finished running
+2024-03-28 15:37:56,411 | INFO | app.ipynb finished running
+2024-03-28 15:42:05,266 | INFO | app.ipynb finished running
+2024-03-28 16:06:25,815 | INFO | app.ipynb finished running
+2024-03-28 16:09:18,038 | INFO | app.ipynb finished running
+2024-03-28 16:14:32,271 | INFO | app.ipynb finished running
+2024-03-28 16:15:43,570 | INFO | app.ipynb finished running
+2024-03-28 16:25:45,338 | INFO | app.ipynb finished running
+2024-03-28 16:37:03,966 | INFO | app.ipynb finished running
+2024-03-28 16:41:17,143 | INFO | app.ipynb finished running
+2024-03-28 16:59:58,879 | INFO | app.ipynb finished running
+2024-03-28 17:03:01,905 | INFO | app.ipynb finished running
+2024-03-28 17:03:43,959 | INFO | app.ipynb finished running
+2024-03-28 17:11:05,130 | INFO | app.ipynb finished running
+2024-03-28 17:15:26,583 | INFO | app.ipynb finished running
+2024-03-28 17:16:29,005 | INFO | app.ipynb finished running
+2024-03-28 17:18:17,954 | INFO | app.ipynb finished running
+2024-03-28 17:22:46,235 | INFO | app.ipynb finished running
+2024-03-28 17:24:49,204 | INFO | app.ipynb finished running
+2024-03-29 07:04:36,203 | INFO | app.ipynb finished running
+2024-03-29 07:19:02,620 | INFO | app.ipynb finished running
+2024-03-29 07:46:57,057 | INFO | TypeError("get_all_courses_with_skills() missing 1 required positional argument: 'skills'")
+2024-03-29 07:48:05,119 | INFO | TypeError("'NoneType' object is not iterable")
+2024-03-29 07:53:42,204 | INFO | KeyError('language')
+2024-03-29 08:03:42,236 | INFO | app.ipynb finished running
+2024-03-29 08:08:30,453 | INFO | app.ipynb finished running
+2024-03-29 08:10:59,584 | INFO | app.ipynb finished running
+2024-03-29 08:20:45,970 | INFO | app.ipynb finished running
+2024-03-29 08:26:12,500 | INFO | app.ipynb finished running
+2024-03-29 08:33:55,599 | INFO | app.ipynb finished running
+2024-03-29 08:46:43,172 | INFO | app.ipynb finished running
+2024-03-29 08:47:36,186 | INFO | app.ipynb finished running
+2024-03-29 08:50:50,537 | INFO | app.ipynb finished running
+2024-03-29 08:51:41,428 | INFO | app.ipynb finished running
+2024-03-29 09:03:00,479 | INFO | app.ipynb finished running
+2024-03-29 09:03:29,494 | INFO | app.ipynb finished running
+2024-03-29 09:12:40,276 | INFO | app.ipynb finished running
+2024-03-29 09:12:59,615 | INFO | app.ipynb finished running
+2024-03-29 09:53:13,490 | INFO | app.ipynb finished running
+2024-03-29 09:54:11,163 | INFO | app.ipynb finished running
+2024-03-29 11:29:59,990 | INFO | app.ipynb finished running
+2024-03-29 11:34:22,003 | INFO | app.ipynb finished running
+2024-03-29 11:36:46,721 | INFO | app.ipynb finished running
+2024-03-29 12:00:01,950 | INFO | app.ipynb finished running
+2024-03-29 12:04:00,192 | INFO | app.ipynb finished running
+2024-03-29 12:08:56,994 | INFO | app.ipynb finished running
+2024-03-29 12:18:07,532 | INFO | app.ipynb finished running
+2024-03-29 12:21:31,389 | INFO | app.ipynb finished running
+2024-03-29 12:28:08,919 | INFO | app.ipynb finished running
+2024-03-29 13:11:11,686 | INFO | app.ipynb finished running
+2024-03-29 13:12:56,313 | INFO | app.ipynb finished running
+2024-03-29 13:14:43,105 | INFO | app.ipynb finished running
+2024-03-29 15:08:32,553 | INFO | app.ipynb finished running
+2024-03-29 15:09:06,117 | INFO | app.ipynb finished running
+2024-03-29 15:18:49,379 | INFO | app.ipynb finished running
+2024-03-29 15:19:40,073 | INFO | app.ipynb finished running
+2024-04-12 20:12:30,787 | INFO | app.ipynb finished running
+2024-04-12 20:36:57,929 | INFO | app.ipynb finished running
+2024-04-12 20:38:03,263 | INFO | app.ipynb finished running
+2024-04-12 20:41:10,672 | INFO | app.ipynb finished running
+2024-04-12 20:46:07,210 | INFO | app.ipynb finished running
+2024-04-12 20:52:04,283 | INFO | app.ipynb finished running
+2024-04-12 20:58:08,518 | INFO | app.ipynb finished running
+2024-04-12 21:07:20,900 | INFO | app.ipynb finished running
+2024-04-12 21:08:01,948 | INFO | app.ipynb finished running
+2024-04-12 21:08:53,884 | INFO | app.ipynb finished running
+2024-04-12 21:09:40,048 | INFO | app.ipynb finished running
+2024-04-12 21:10:10,662 | INFO | app.ipynb finished running
+2024-04-12 21:13:57,071 | INFO | app.ipynb finished running
+2024-04-12 21:21:30,368 | INFO | app.ipynb finished running
+2024-04-12 21:25:16,982 | INFO | app.ipynb finished running
+2024-04-12 21:29:49,806 | INFO | app.ipynb finished running
+2024-04-12 21:30:27,673 | INFO | app.ipynb finished running
+2024-04-12 21:31:21,207 | INFO | app.ipynb finished running
+2024-04-12 21:32:44,342 | INFO | app.ipynb finished running
+2024-04-12 21:34:19,647 | INFO | app.ipynb finished running
+2024-04-12 22:08:22,227 | INFO | KeyError('count')
+2024-04-12 22:14:02,692 | INFO | app.ipynb finished running
+2024-04-12 22:17:47,054 | INFO | app.ipynb finished running
+2024-04-12 22:33:13,567 | INFO | app.ipynb finished running
+2024-04-12 22:36:10,892 | INFO | app.ipynb finished running
+2024-04-12 22:49:42,731 | INFO | app.ipynb finished running
+2024-04-18 13:57:23,374 | INFO | IndexError('single positional indexer is out-of-bounds')
+2024-04-18 14:00:21,824 | INFO | app.ipynb finished running
+2024-04-18 14:37:51,653 | INFO | app.ipynb finished running
+2024-04-18 14:41:18,915 | INFO | app.ipynb finished running
+2024-04-19 16:06:36,306 | INFO | main python app finished running
+2024-04-19 16:08:08,539 | INFO | app.ipynb finished running
+2024-04-19 17:16:36,852 | INFO | main python app finished running
+2024-04-23 22:43:34,304 | INFO | main python app finished running
+2024-04-23 22:44:09,054 | INFO | main python app finished running
+2024-04-23 23:38:58,571 | INFO | main python app finished running
+2024-04-23 23:39:58,892 | INFO | main python app finished running
+2024-04-23 23:44:01,702 | INFO | ValueError("'show' method requires the altair_viewer package. See http://github.com/altair-viz/altair_viewer")
+2024-04-23 23:50:31,676 | INFO | NoMatchingVersions("No matches for version='5.8.0' among ['4.0.2', '4.8.1', '4.17.0'].\nOften this can be fixed by updating altair_viewer:\n    pip install -U altair_viewer")
+2024-04-23 23:53:58,335 | INFO | main python app finished running
+2024-04-23 23:57:01,875 | INFO | main python app finished running
+2024-04-24 00:17:32,940 | INFO | main python app finished running
+2024-04-24 00:19:15,444 | INFO | main python app finished running
+2024-04-24 00:36:45,745 | INFO | main python app finished running
+2024-04-30 16:16:39,505 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:40:31,639 | INFO | AssertionError('Driver not initialized!')
+2024-04-30 16:42:13,959 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:49:25,061 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:53:55,238 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:55:45,601 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-04-30 16:57:57,402 | INFO | KeyError("The following id_vars or value_vars are not present in the DataFrame: ['Profiles', 'Count', 'Max', 'Coverage', 'Total score']")
+2024-05-01 20:49:36,946 | INFO | main python app finished running
+2024-05-01 20:50:54,603 | INFO | main python app finished running
+2024-05-01 20:53:19,429 | INFO | main python app finished running
+2024-05-01 20:54:00,656 | INFO | main python app finished running
+2024-05-01 21:00:08,825 | INFO | main python app finished running
+2024-05-01 21:04:50,967 | INFO | NameError("name 'Column' is not defined")
+2024-05-01 21:05:39,857 | INFO | NameError("name 'X' is not defined")
+2024-05-01 21:06:09,481 | INFO | main python app finished running
+2024-05-01 21:08:30,981 | INFO | app.ipynb finished running
+2024-05-01 21:17:41,257 | INFO | app.ipynb finished running
+2024-05-01 21:20:21,310 | INFO | app.ipynb finished running
+2024-05-01 21:22:47,861 | INFO | UnboundLocalError("cannot access local variable 'profiles' where it is not associated with a value")
+2024-05-01 21:26:41,875 | INFO | app.ipynb finished running
+2024-05-01 21:27:23,359 | INFO | app.ipynb finished running
+2024-05-01 22:56:57,753 | INFO | main python app finished running
+2024-05-01 23:05:19,722 | INFO | app.ipynb finished running
+2024-05-01 23:10:28,325 | INFO | app.ipynb finished running
+2024-05-01 23:12:48,698 | INFO | This is an info message!
+2024-05-01 23:12:48,700 | ERROR | This is an error message.
+2024-05-01 23:12:48,701 | WARNING | This is a warning message.
+2024-05-01 23:12:48,701 | CRITICAL | This is a critical message.
+2024-05-01 22:12:26,043 | INFO | Webapp finished running
+2024-05-01 22:25:54,859 | INFO | Webapp finished running
+05/02/2024 12:39:08 AM Romance Daylight Time | INFO | main python app finished running
+05/01/2024 10:44:38 PM UTC | INFO | Webapp finished running
+05/01/2024 10:53:50 PM UTC | INFO | Webapp finished running
+05/01/2024 11:00:35 PM UTC | INFO | Webapp finished running
+05/02/2024 12:51:06 PM Romance Daylight Time | INFO | main python app finished running
+05/02/2024 01:00:24 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 01:05:33 PM Romance Daylight Time | INFO | This is an info message!
+05/02/2024 01:05:33 PM Romance Daylight Time | ERROR | This is an error message.
+05/02/2024 01:05:33 PM Romance Daylight Time | WARNING | This is a warning message.
+05/02/2024 01:05:33 PM Romance Daylight Time | CRITICAL | This is a critical message.
+05/02/2024 12:08:19 PM UTC | INFO | Webapp finished running
+05/02/2024 02:10:32 PM Romance Daylight Time | INFO | main python app finished running
+05/02/2024 12:31:39 PM UTC | INFO | Webapp finished running
+05/02/2024 12:31:47 PM UTC | INFO | Webapp finished running
+05/02/2024 06:12:15 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 06:12:30 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 06:22:28 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 06:29:42 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 06:30:08 PM Romance Daylight Time | INFO | app.ipynb finished running
+05/02/2024 06:49:36 PM Romance Daylight Time | INFO | app.ipynb finished running - no skills found in the resume
+05/02/2024 06:51:21 PM Romance Daylight Time | INFO | app.ipynb finished running - no skills found in the resume
+05/02/2024 07:06:29 PM Romance Daylight Time | INFO | app.ipynb finished running - no skills found in the resume
+05/02/2024 05:11:49 PM UTC | INFO | Webapp finished running - no skills found in the resume
+05/02/2024 05:15:25 PM UTC | INFO | Webapp finished running - no skills found in the resume
+05/02/2024 07:18:27 PM Romance Daylight Time | INFO | app.ipynb finished running - no skills found in the resume
+05/02/2024 05:19:09 PM UTC | INFO | Webapp finished running - no skills found in the resume
+05/02/2024 05:19:26 PM UTC | INFO | Webapp finished running - no skills found in the resume
+05/02/2024 05:19:38 PM UTC | INFO | Webapp finished running
