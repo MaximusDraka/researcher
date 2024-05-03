@@ -375,9 +375,8 @@ def run():
                       
                 inputs = {"data": cv_content, "ner_type": ner_type, "scenario": scenario, "to_be_profile": to_be_profile, "show_displacy": show_displacy, "recommender_type": recommender_type, "classification_type": recommender_type}
                 
-                response = get_response(inputs)                                
-                response = response.json()                  
-                
+                response = get_response(inputs).model_dump()                    
+                                
                 status = response['status']
                 skills = response['skills']
                 df_profiles = pd.DataFrame(response['profiles'])                    
