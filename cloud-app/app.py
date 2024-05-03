@@ -274,7 +274,7 @@ def recommendcourses(user_input: dict):
                 log_profiles = profiles.to_dict()    
     
     
-    monitor.write_to_log(scenario,user_input.data,ner_type,skills,log_profiles,recommended_courses.to_dict(),classification_type,recommender_type,to_be_profile)
+    monitor.write_to_log(scenario,user_input["data"],ner_type,skills,log_profiles,recommended_courses.to_dict(),classification_type,recommender_type,to_be_profile)
     app_logger.logger.info('Webapp finished running')
     
     
