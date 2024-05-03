@@ -319,16 +319,6 @@ def get_response(inputs):
    return recommendcourses(data=json.dumps(inputs))                         
 
 
-def get_log_file():
-    response = obtainlogasJSON()                        
-    return response.json()    
-
-
-def get_skills(profile):
-    response = gettopskillsbyprofile(params={'profile': profile})   
-                      
-    return response.json()
-
 
 def run():    
     st.set_page_config(
@@ -377,7 +367,7 @@ def run():
             pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
         
             if pdf_file is not None:           
-                save_image_path = './Uploaded_Resumes/' + pdf_file.name
+                save_image_path = '/mount/src/skill-skeleton/cloud-app/Uploaded_Resumes/' + pdf_file.name
                 with open(save_image_path, "wb") as f:
                     f.write(pdf_file.getbuffer())
                 
@@ -474,7 +464,7 @@ def run():
         st.success('Welcome Data Engineer')
         st.subheader('Model logs')  
            
-        response = get_log_file()             
+        response = obtainlogasJSON()             
        
         df_log = pd.DataFrame(response)
         df_log['date'] = pd.to_datetime(df_log['date'],dayfirst=True)
@@ -488,13 +478,13 @@ def run():
 
     if choice == 'Data Analyst':
         
-        response_DA = get_skills("Data Analyst")
+        response_DA = gettopskillsbyprofile("Data Analyst")
         df_DA = pd.DataFrame(response_DA)
         
-        response_DE = get_skills("Data Engineer")
+        response_DE = gettopskillsbyprofile("Data Engineer")
         df_DE = pd.DataFrame(response_DE)
         
-        response_DS = get_skills("Data Scientist")
+        response_DS = gettopskillsbyprofile("Data Scientist")
         df_DS = pd.DataFrame(response_DS)
         
         with st.container():
