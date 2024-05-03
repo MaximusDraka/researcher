@@ -375,16 +375,16 @@ def run():
                       
                 inputs = {"data": cv_content, "ner_type": ner_type, "scenario": scenario, "to_be_profile": to_be_profile, "show_displacy": show_displacy, "recommender_type": recommender_type, "classification_type": recommender_type}
                 
-                response = get_response(inputs).model_dump()                    
+                response = get_response(inputs)
                                 
-                status = response['status']
-                skills = response['skills']
-                df_profiles = pd.DataFrame(response['profiles'])                    
-                df_courses = pd.DataFrame(response['courses'])
-                displacy_html = response['displacy_html']
+                status = response.status
+                skills = response.skills
+                df_profiles = pd.DataFrame(response.profiles)                    
+                df_courses = pd.DataFrame(response.courses)
+                displacy_html = response.displacy_html
                 
-                config =  response['config']
-                meta =  response['meta']
+                config =  response.config
+                meta =  response.meta
                 
                 with col2:
 
@@ -414,10 +414,10 @@ def run():
                                             value=skills, key='1')
                         
                         if scenario == 'Improve existing profile with missing skills' or scenario == 'Become a specific profile':
-                            if response['skills_to_learn']:                         
+                            if response.skills_to_learn:                         
                                 missing_skills = st_tags(label='### Skills that you want to learn',
                                             text='',
-                                            value=response['skills_to_learn'].split(), key='2')                       
+                                            value=response.skills_to_learn.split(), key='2')                       
                                 
                         
                         if scenario == 'Improve existing profile with missing skills' or scenario == 'Improve existing profile with current skills':
