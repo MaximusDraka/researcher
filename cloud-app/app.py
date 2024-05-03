@@ -157,47 +157,47 @@ def obtainlogasJSON(filename: str="/mount/src/skill-skeleton/cloud-app/data/log/
     return data
 
 
-def recommendcourses(user_input: ApplicationInput):
+def recommendcourses(user_input: dict):
     
     displacy_html_content = ""
     
-    if user_input.ner_type == 'Ruler':
+    if user_input["ner_type"] == 'Ruler':
         ner_type = 'A'
-    if user_input.ner_type == 'Matcher':
+    if user_input["ner_type"] == 'Matcher':
         ner_type = 'B'
-    if user_input.ner_type == 'Trained NER':
+    if user_input["ner_type"] == 'Trained NER':
         ner_type = 'C'
     
-    if user_input.scenario == 'Improve existing profile with current skills':
+    if user_input["scenario"] == 'Improve existing profile with current skills':
         scenario = 'A'
-    if user_input.scenario == 'Improve existing profile with missing skills':     
+    if user_input["scenario"] == 'Improve existing profile with missing skills':     
         scenario = 'B'
-    if user_input.scenario == 'Become a specific profile':
+    if user_input["scenario"] == 'Become a specific profile':
         scenario = 'C'
     
    
-    if user_input.classification_type == 'Python code':
+    if user_input["classification_type"] == 'Python code':
         classification_type = 'A1'
-    if user_input.classification_type == 'Cypher query':
+    if user_input["classification_type"] == 'Cypher query':
         classification_type = 'A2'
-    if user_input.classification_type == 'text classification':
+    if user_input["classification_type"] == 'text classification':
         classification_type = 'B' 
     
-    to_be_profile = user_input.to_be_profile
-    recommender_type = user_input.recommender_type
-    show_displacy = user_input.show_displacy
+    to_be_profile = user_input["to_be_profile"]
+    recommender_type = user_input["recommender_type"]
+    show_displacy = user_input["show_displacy"]
     
     #Configure application
     app_logger, monitor, conn, nlp, loaded_matcher, config, meta  = config_app(ner_type)
     
-    doc, skills = extract_skills(user_input.data, conn, nlp, loaded_matcher, ner_type)
+    doc, skills = extract_skills(user_input["data"], conn, nlp, loaded_matcher, ner_type)
     
     if len(skills) == 0:
            
             log_profiles= {"profile": {"0": None}}
             recommended_courses = query.get_courses_with_many_skills(conn, 5)            
 
-            monitor.write_to_log(scenario,user_input.data,ner_type,skills,log_profiles,recommended_courses.to_dict(),classification_type,recommender_type,to_be_profile)
+            monitor.write_to_log(scenario,user_input["data"],ner_type,skills,log_profiles,recommended_courses.to_dict(),classification_type,recommender_type,to_be_profile)
             app_logger.logger.info('Webapp finished running - no skills found in the resume')
     
             return ApplicationOutput(status="NO_SKILLS_FOUND",
