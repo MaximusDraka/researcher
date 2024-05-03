@@ -91,6 +91,22 @@ def get_eigenvector(conn: Neo4jConnection, graph_name: str, db: str="neo4j") -> 
     return pd.DataFrame([dict(_) for _ in conn.query(query_string,parameters=parameters,db=db)])
 
 
+def get_louvain(conn: Neo4jConnection, graph_name: str, db: str="neo4j") -> pd.DataFrame: 
+
+    parameters = {'graph_name': graph_name}
+
+    query_string = '''
+    CALL gds.louvain.stream($graph_name)
+    YIELD nodeId, communityId, intermediateCommunityIds
+    RETURN gds.util.asNode(nodeId).name AS name, communityId
+    ORDER BY communityId ASC
+    '''
+    return pd.DataFrame([dict(_) for _ in conn.query(query_string,parameters=parameters,db=db)])
+
+
+
+
+
 def show_profile_score_graph(df: pd.DataFrame):
     
     plt.figure(figsize=(8,4))
