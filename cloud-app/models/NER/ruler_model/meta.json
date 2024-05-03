@@ -1,0 +1,33 @@
+{
+  "lang":"en",
+  "name":"ruler_model",
+  "version":"0.0.1",
+  "spacy_version":">=3.7.3,<3.8.0",
+  "description":"Spacy entity ruler for skill extraction",
+  "author":"Tom Larminier",
+  "email":"",
+  "url":"https://github.com/MaximusDraka/skill-skeleton",
+  "license":"Public Domain License",
+  "spacy_git_version":"e1249d372",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "entity_ruler":[
+      "SKILL"
+    ]
+  },
+  "pipeline":[
+    "entity_ruler"
+  ],
+  "components":[
+    "entity_ruler"
+  ],
+  "disabled":[
+
+  ]
+}
