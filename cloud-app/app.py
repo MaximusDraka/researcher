@@ -87,14 +87,14 @@ def config_app(NER_type: str) -> tuple[logger_util.Logger_util, monitor_util.Mon
     # Load the NER model    
     if NER_type == 'A':
         NER_model = 'ruler_model'
-        nlp = spacy.load("./models/NER/%s" % (NER_model))
+        nlp = spacy.load("/mount/src/skill-skeleton/cloud-app/models/NER/%s" % (NER_model))
         config = nlp.config.to_str()
         meta=nlp.meta
     
     if NER_type == 'B':
         nlp = spacy.load("en_core_web_sm")
         nlp.vocab.strings.add('SKILL')        
-        filename = "./models/NER/finalized_matcher.pickle"
+        filename = "/mount/src/skill-skeleton/cloud-app/models/NER/finalized_matcher.pickle"
         file = Path(filename)
         
         if file.is_file():
@@ -109,7 +109,7 @@ def config_app(NER_type: str) -> tuple[logger_util.Logger_util, monitor_util.Mon
     
     if NER_type == 'C':
         NER_model = 'model-best-C_PT_E_HP_P'
-        nlp = spacy.load("./models/NER/%s" % (NER_model))
+        nlp = spacy.load("/mount/src/skill-skeleton/cloud-app/models/NER/%s" % (NER_model))
         config = nlp.config.to_str()
         meta=nlp.meta
         
@@ -143,20 +143,18 @@ def gettopskillsbyprofile(profile: str="Data Analyst"):
                         user=st.secrets["DB_USERNAME"],              
                         pwd=st.secrets["DB_PASSWORD"])
    
-    df_data = query.get_skills_by_profile(conn, profile) 
+    df_data = query.get_skills_by_profile(conn, profile)   
     
-    response = df_data.to_dict()
-    
-    return JSONResponse(content=jsonable_encoder(response)) 
+    return df_data
 
 
-def obtainlogasJSON(filename: str="./data/log/monitor.jsonl"):
+def obtainlogasJSON(filename: str="/mount/src/skill-skeleton/cloud-app/data/log/monitor.jsonl"):
     data = [] 
     with open(filename) as f:        
          for line in f:
             data.append(json.loads(line))   
     
-    return JSONResponse(content=jsonable_encoder(data))  
+    return data
 
 
 def recommendcourses(user_input: ApplicationInput):
