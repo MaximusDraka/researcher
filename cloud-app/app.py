@@ -314,7 +314,7 @@ def get_html(html: str):
 
 @st.cache_data()
 def get_response(inputs):
-   return recommendcourses(data=json.dumps(inputs))                         
+   return recommendcourses(inputs)                         
 
 
 
