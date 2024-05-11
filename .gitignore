@@ -1,4 +1,7 @@
 **/.env
+.vscode/
+__pycache__/
+.devcontainer/
 skill-project/sk2/training/All/model-best-C_R_A_F/config.cfg
 skill-project/sk2/training/All/model-best-C_R_A_F/meta.json
 skill-project/sk2/training/All/model-best-C_R_A_F/metrics.json

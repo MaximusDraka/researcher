@@ -1,0 +1,24 @@
+Project sources
+----------------
+Sample projects and papers
+Kaggle
+Youtube
+Medium
+Stackoverflow
+GIT code
+Co-pilot
+Datacamp python course
+Software documentation
+Google search
+
+Spacy
+------
+https://medium.com/@johnidouglasmarangon/building-a-custom-named-entity-recognition-model-using-spacy-data-labeling-part-1-8365126dc341
+
+Cosine distance
+----------------
+https://www.geeksforgeeks.org/python-word-similarity-using-spacy/
+https://stackoverflow.com/questions/57697374/list-most-similar-words-in-spacy-in-pretrained-model#58932131
+https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn
+https://www.youtube.com/watch?v=ijtxuF_5kEU
+

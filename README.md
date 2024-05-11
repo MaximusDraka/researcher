@@ -16,18 +16,27 @@ This project is the result of a dissertation as a student at the KU Leuven.
 
 # Setup - Python app
 - Download full project
-- create pip or conda environment based on requirements.txt
-- Create Neo4J database from /data/database/profile-kb.dump 
-    - Option A : Local Neo4J desktop - Configure neo4J database to use local fixed IP - See /screenshots for example
-    - Option B : Neo4J Aura
-- create .env file in the root folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI- 
-- Run python main.py --help or notebooks/demo/app.ipynb
+- create conda environment based on environment.yml
+- Create Neo4J database with name neo4J using /data/database/profile-kb.dump 
+    - Option A : Local Neo4J desktop - Configure neo4J database to use local fixed IP - See /screenshots/Neo4J for an example
+    - Option B : Neo4J Aura - Cloud
+- create .env file in the root folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI, PROJECT_PATH, LOG_FILE, MONITOR_FILE
+- Run python main.py --help or notebooks/demo/app.ipynb using the conda environment you created before
 
-# Setup - Web app
+# Setup - Local Web app
 - Download /app
 - create .env file in the /app/back folder DB_USERNAME, DB_PASSWORD, DB_PORT, DB_URI, PROJECT_PATH, LOG_FILE, MONITOR_FILE
 - Install docker
 - Follow instructions under /docs/docker-commands.txt
+
+# Setup - Cloud Web app
+- https://neo4j.com/ - Aura Login
+    - Make sure the DB is active, it will be put in sleep mode after some inactivity
+- https://share.streamlit.io/signup
+    - Use your GitHub account to log in and configure the root folder of the application to the "cloud-app" folder
+    - configure the streamlit secrets, this replaces the .env files - containing the DB settings
+    - Activate the project by giving it a unique url xyz.streamlit.app
+    - Make sure the app is active, it will be put in sleep mode after some inactivity
 
 # Content
 This project based on Python contains the following aspects:
@@ -63,7 +72,7 @@ This project based on Python contains the following aspects:
     - GraphML    
 - Notebook demo app /notebooks/demo/app.ipynb
 - CLI demo app /main.py
-- Web app
+- Local Web app
     - Docker container - Front-end - Streamlit
         - Upload PDF resume - detect skills - define profile - recommend courses
             - Displacy
@@ -75,6 +84,7 @@ This project based on Python contains the following aspects:
         - Recommender endpoint
         - Model log endpoint
         - Top skill by profile endpoint
+- Cloud hosted Streamlit web app using Neo4J Aura
 
 # Tools used to perform this project
 - Visual studio Code + Co-pilot plugin - 1.88.1
@@ -90,8 +100,11 @@ This project based on Python contains the following aspects:
 - Cloud Neo4J
     - Neo4J Aura
     - https://neodash.graphapp.io/
+    - NeoDash
+- Cloud Streamlit
+    - https://share.streamlit.io/signup
 - Docker Desktop - v24.0.7	
-- GIT	
+- GitHub
 - yEd - 3.23.2	
 
 # Major Python modules used
@@ -103,6 +116,7 @@ This project based on Python contains the following aspects:
 - NetworkX
 - FAST-API
 - Streamlit
+- Neo4J-Streamlit
 
 # Used for analysis
 - Google colab - GPU Pre-training NER model
@@ -110,7 +124,7 @@ This project based on Python contains the following aspects:
 
 # Disclaimers
 All the information you contribute to this repository, including github issues and code samples are public and open.
-The data pre-processing is performed with multiple jupyter Notebooks, afterwards a spacy project takes over the NER model training.
+The data pre-processing is performed with multiple jupyter Notebooks, afterwards a spacy project takes over the NER model training and evaluation.
 This project requires a Neo4J database containing the ontology and available courses, a sample databse can be found as a dump file under /data/database.
 All the code is available to re-create the project.
 
@@ -133,4 +147,3 @@ All the code is available to re-create the project.
 
 # Recommended improvements
 - Turn all notebooks into python scripts and add them to the spacy project
-- Host Neo4J : https://neo4j.com/cloud/platform/aura-graph-database/
